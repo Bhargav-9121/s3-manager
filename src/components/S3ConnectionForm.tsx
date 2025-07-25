@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Loader2, Cloud, Key, MapPin, Database } from "lucide-react";
+import { Loader2, Cloud, Key, MapPin, Database, Copy } from "lucide-react";
 import { S3Credentials } from "@/types/s3Types";
 import { useToast } from "@/hooks/use-toast";
 
@@ -33,6 +33,34 @@ export const S3ConnectionForm: React.FC<S3ConnectionFormProps> = ({
   const [rememberCredentials, setRememberCredentials] = useState(false);
   const [error, setError] = useState<string>("");
   const { toast } = useToast();
+
+  const corsConfig = `[
+    {
+        "AllowedHeaders": ["*"],
+        "AllowedMethods": ["GET", "PUT", "POST", "DELETE", "HEAD"],
+        "AllowedOrigins": [
+            "https://s3-manager-ten.vercel.app",
+        ],
+        "ExposeHeaders": ["ETag"],
+        "MaxAgeSeconds": 3000
+    }
+]`;
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(corsConfig);
+      toast({
+        title: "Copied!",
+        description: "CORS configuration copied to clipboard",
+      });
+    } catch (error) {
+      toast({
+        title: "Copy failed",
+        description: "Please copy the JSON manually",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -210,18 +238,18 @@ export const S3ConnectionForm: React.FC<S3ConnectionFormProps> = ({
                   <p>• Find Cross-origin resource sharing (CORS)</p>
                   <p>• Click Edit and paste the below JSON:</p>
                 </div>
-                <div className="mt-2 p-3 bg-white border border-gray-300 rounded text-xs font-mono overflow-x-auto">
-                  <pre>{`[
-    {
-        "AllowedHeaders": ["*"],
-        "AllowedMethods": ["GET", "PUT", "POST", "DELETE", "HEAD"],
-        "AllowedOrigins": [
-            "https://s3-manager-ten.vercel.app",
-        ],
-        "ExposeHeaders": ["ETag"],
-        "MaxAgeSeconds": 3000
-    }
-]`}</pre>
+                <div className="mt-2 relative">
+                  <div className="p-3 bg-white border border-gray-300 rounded text-xs font-mono overflow-x-auto">
+                    <pre>{corsConfig}</pre>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={copyToClipboard}
+                    className="absolute top-2 right-2 h-8 w-8 p-0 hover:bg-gray-100"
+                  >
+                    <Copy className="h-4 w-4" />
+                  </Button>
                 </div>
               </div>
 
