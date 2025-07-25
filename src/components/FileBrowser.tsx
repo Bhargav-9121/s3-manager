@@ -600,6 +600,68 @@ export const FileBrowser: React.FC<FileBrowserProps> = ({
                         onClick={(e) => e.stopPropagation()}
                         className="absolute top-2 left-2 z-10 bg-white shadow-sm"
                       />
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="absolute top-2 right-2 z-10 h-6 w-6 p-0 bg-white shadow-sm hover:bg-gray-100"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <MoreVertical className="h-3 w-3" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          {file.type === "file" && (
+                            <>
+                              <DropdownMenuItem
+                                onClick={() => onDownload(file)}
+                              >
+                                <Download className="h-4 w-4 mr-2" />
+                                Download
+                              </DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() => {
+                                  setFileToShare(file);
+                                  setShowShare(true);
+                                }}
+                              >
+                                <Share2 className="h-4 w-4 mr-2" />
+                                Share
+                              </DropdownMenuItem>
+                            </>
+                          )}
+                          {file.type === "folder" && (
+                            <DropdownMenuItem
+                              onClick={() => onDownloadFolder(file)}
+                            >
+                              <Download className="h-4 w-4 mr-2" />
+                              Download Folder
+                            </DropdownMenuItem>
+                          )}
+                          <DropdownMenuItem
+                            onClick={() => {
+                              setFileToRename(file);
+                              const { name } = getFileNameAndExtension(
+                                file.name,
+                                file.type === "file"
+                              );
+                              setRenameName(name);
+                              setShowRename(true);
+                            }}
+                          >
+                            <Edit3 className="h-4 w-4 mr-2" />
+                            Rename
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => onDelete([file])}
+                            className="text-red-600"
+                          >
+                            <Trash2 className="h-4 w-4 mr-2" />
+                            Delete
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                       <div
                         className="flex items-center justify-center h-20 w-full bg-gray-50 rounded cursor-pointer"
                         onClick={() => handleFileSelect(file)}
@@ -639,65 +701,6 @@ export const FileBrowser: React.FC<FileBrowserProps> = ({
                         <p>{formatDate(file.lastModified)}</p>
                       </div>
                     </div>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="h-6 w-6 p-0"
-                        >
-                          <MoreVertical className="h-3 w-3" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        {file.type === "file" && (
-                          <>
-                            <DropdownMenuItem onClick={() => onDownload(file)}>
-                              <Download className="h-4 w-4 mr-2" />
-                              Download
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                              onClick={() => {
-                                setFileToShare(file);
-                                setShowShare(true);
-                              }}
-                            >
-                              <Share2 className="h-4 w-4 mr-2" />
-                              Share
-                            </DropdownMenuItem>
-                          </>
-                        )}
-                        {file.type === "folder" && (
-                          <DropdownMenuItem
-                            onClick={() => onDownloadFolder(file)}
-                          >
-                            <Download className="h-4 w-4 mr-2" />
-                            Download Folder
-                          </DropdownMenuItem>
-                        )}
-                        <DropdownMenuItem
-                          onClick={() => {
-                            setFileToRename(file);
-                            const { name } = getFileNameAndExtension(
-                              file.name,
-                              file.type === "file"
-                            );
-                            setRenameName(name);
-                            setShowRename(true);
-                          }}
-                        >
-                          <Edit3 className="h-4 w-4 mr-2" />
-                          Rename
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() => onDelete([file])}
-                          className="text-red-600"
-                        >
-                          <Trash2 className="h-4 w-4 mr-2" />
-                          Delete
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
                   </div>
                 </CardContent>
               </Card>
