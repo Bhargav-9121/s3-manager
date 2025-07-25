@@ -14,6 +14,7 @@ import {
   SortBy,
   SortOrder,
 } from "@/types/s3Types";
+import { Cloud } from "lucide-react";
 
 const Index = () => {
   const [isConnected, setIsConnected] = useState(false);
@@ -243,11 +244,11 @@ const Index = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
         <div className="w-full max-w-2xl">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-4">
+            <h1 className="text-4xl font-bold text-gray-900 mb-3">
               S3 File Manager
             </h1>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-600 p-0 m-0">
               Connect to your AWS S3 bucket to manage files with ease
             </p>
           </div>

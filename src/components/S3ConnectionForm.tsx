@@ -77,16 +77,6 @@ export const S3ConnectionForm: React.FC<S3ConnectionFormProps> = ({
 
   return (
     <Card className="w-full max-w-2xl mx-auto shadow-lg pt-3">
-      {/* <CardHeader className="text-center">
-        <div className="flex justify-center mb-4">
-          <Cloud className="h-12 w-12 text-blue-600" />
-        </div>
-        <CardTitle className="text-2xl font-bold">Connect to AWS S3</CardTitle>
-        <CardDescription className="text-base">
-          Enter your AWS credentials to access your S3 bucket
-        </CardDescription>
-      </CardHeader> */}
-
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6 mt-5">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -164,7 +154,7 @@ export const S3ConnectionForm: React.FC<S3ConnectionFormProps> = ({
                 onChange={(e) =>
                   handleInputChange("bucketName", e.target.value)
                 }
-                placeholder="my-bucket-name"
+                placeholder="bucket-name"
                 required
               />
             </div>
@@ -205,14 +195,11 @@ export const S3ConnectionForm: React.FC<S3ConnectionFormProps> = ({
         </form>{" "}
         <div className="mt-6 space-y-4">
           <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
-            <h4 className="font-semibold text-gray-800 mb-3 flex items-center">
+            <h1 className="text-xl font-semibold text-gray-800 mb-3 flex items-center">
               🚀 Setup Your S3 Bucket
-            </h4>
-            <p className="text-sm text-gray-700 mb-3">
-              Configure your S3 bucket for Chai Storage access:
-            </p>
+            </h1>
 
-            <div className="space-y-4">
+            <div className="space-y-4 ml-2">
               <div>
                 <h5 className="font-medium text-gray-800 mb-2">
                   1. Configure CORS Policy
@@ -221,7 +208,7 @@ export const S3ConnectionForm: React.FC<S3ConnectionFormProps> = ({
                   <p>• Go to your AWS S3 Console</p>
                   <p>• Select your bucket → Permissions tab</p>
                   <p>• Find Cross-origin resource sharing (CORS)</p>
-                  <p>• Click Edit and paste the JSON below:</p>
+                  <p>• Click Edit and paste the below JSON:</p>
                 </div>
                 <div className="mt-2 p-3 bg-white border border-gray-300 rounded text-xs font-mono overflow-x-auto">
                   <pre>{`[
@@ -229,10 +216,7 @@ export const S3ConnectionForm: React.FC<S3ConnectionFormProps> = ({
         "AllowedHeaders": ["*"],
         "AllowedMethods": ["GET", "PUT", "POST", "DELETE", "HEAD"],
         "AllowedOrigins": [
-            "https://storage.chaicode.com",
-            "http://localhost:*",
-            "https://localhost:*",
-            "*"
+            "https://s3-manager-ten.vercel.app",
         ],
         "ExposeHeaders": ["ETag"],
         "MaxAgeSeconds": 3000
