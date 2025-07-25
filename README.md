@@ -151,17 +151,17 @@ Configure your S3 bucket's CORS policy:
 
 ### Grid View
 
-![Grid View](https://github.com/user-attachments/assets/a0ab03c6-cc7c-4f7b-a3e3-4bce83277389)
+![Grid View](https://github.com/user-attachments/assets/02320203-3e6c-4153-9a30-1c8f79715c15)
 _Large icon view with image thumbnails and file type icons_
 
 ### List View
 
-![List View](https://github.com/user-attachments/assets/15eb55c7-3125-4d92-acb3-5ada028bbafd)
+![List View](https://github.com/user-attachments/assets/da800c5f-12a4-414e-a28b-abb3bf76c3bd)
 _Detailed list view with file information_
 
 ### File Preview
 
-![File Preview](https://github.com/user-attachments/assets/84ef059e-fde4-4b02-afb4-74653699caa4)
+![File Preview](https://github.com/user-attachments/assets/0b78b106-2a82-436d-80e4-22e59e29e535)
 _Side panel preview for selected files_
 
 ## 🎯 Usage
